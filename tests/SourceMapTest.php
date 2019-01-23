@@ -56,16 +56,16 @@ class SourceMapTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider getByLocalUriDataProvider
+     * @dataProvider getByMappedUriDataProvider
      */
-    public function testGetSourcePath(array $sources, string $localUri, ?Source $expectedSource)
+    public function testGetByMappedUri(array $sources, string $localUri, ?Source $expectedSource)
     {
         $sourceMap = new SourceMap($sources);
 
-        $this->assertEquals($expectedSource, $sourceMap->getByLocalUri($localUri));
+        $this->assertEquals($expectedSource, $sourceMap->getByMappedUri($localUri));
     }
 
-    public function getByLocalUriDataProvider(): array
+    public function getByMappedUriDataProvider(): array
     {
         $availableSource = new Source('http://example.com/foo.css', 'file:///foo.css');
         $unavailableSource = new Source('http://example.com/404');
