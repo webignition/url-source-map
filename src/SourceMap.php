@@ -50,7 +50,7 @@ class SourceMap implements \ArrayAccess, \Iterator, \Countable
 
     /**
      * @param string $offset
-     * @param string $value
+     * @param Source $value
      */
     public function offsetSet($offset, $value)
     {

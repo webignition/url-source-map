@@ -1,7 +1,7 @@
 <?php
 /** @noinspection PhpDocSignatureInspection */
 
-namespace webignition\UrlSourceMap\Tests\Wrapper;
+namespace webignition\UrlSourceMap\Tests;
 
 use webignition\UrlSourceMap\Source;
 use webignition\UrlSourceMap\SourceMap;
