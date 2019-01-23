@@ -34,6 +34,19 @@ class SourceMap implements \ArrayAccess, \Iterator, \Countable
         return null;
     }
 
+    public function byType(string $type): SourceMap
+    {
+        $filteredSources = [];
+
+        foreach ($this as $source) {
+            if ($type === $source->getType()) {
+                $filteredSources[] = $source;
+            }
+        }
+
+        return new SourceMap($filteredSources);
+    }
+
     public function offsetExists($offset): bool
     {
         if (!is_string($offset)) {

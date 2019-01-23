@@ -201,4 +201,47 @@ class SourceMapTest extends \PHPUnit\Framework\TestCase
         unset($sourceMap['http://example.com/style.css']);
         $this->assertEquals(0, count($sourceMap));
     }
+
+    /**
+     * @dataProvider byTypeDataProvider
+     */
+    public function testByType(SourceMap $sourceMap, string $type, SourceMap $expectedSourceMap)
+    {
+        $filteredSourceMap = $sourceMap->byType($type);
+
+        $this->assertNotSame($sourceMap, $filteredSourceMap);
+        $this->assertEquals($expectedSourceMap, $filteredSourceMap);
+    }
+
+    public function byTypeDataProvider(): array
+    {
+        return [
+            'empty source map' => [
+                'sourceMap' => new SourceMap(),
+                'type' => 'resource',
+                'expectedSourceMap' => new SourceMap(),
+            ],
+            'no matching type' => [
+                'sourceMap' => new SourceMap([
+                    new Source('http://example.com/one', 'file:/tmp/one', 'import'),
+                    new Source('http://example.com/two', 'file:/tmp/two', 'import'),
+                    new Source('http://example.com/three', 'file:/tmp/three', 'import'),
+                ]),
+                'type' => 'resource',
+                'expectedSourceMap' => new SourceMap(),
+            ],
+            'has matching type' => [
+                'sourceMap' => new SourceMap([
+                    new Source('http://example.com/one', 'file:/tmp/one', 'resource'),
+                    new Source('http://example.com/two', 'file:/tmp/two', 'import'),
+                    new Source('http://example.com/three', 'file:/tmp/three', 'resource'),
+                ]),
+                'type' => 'resource',
+                'expectedSourceMap' => new SourceMap([
+                    new Source('http://example.com/one', 'file:/tmp/one', 'resource'),
+                    new Source('http://example.com/three', 'file:/tmp/three', 'resource'),
+                ])
+            ],
+        ];
+    }
 }
