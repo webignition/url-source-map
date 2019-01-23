@@ -5,12 +5,12 @@ namespace webignition\UrlSourceMap;
 class Source
 {
     private $uri;
-    private $localUri;
+    private $mappedUri;
 
-    public function __construct(string $uri, ?string $localUri = null)
+    public function __construct(string $uri, ?string $mappedUri = null)
     {
         $this->uri = $uri;
-        $this->localUri = $localUri;
+        $this->mappedUri = $mappedUri;
     }
 
     public function getUri(): string
@@ -18,13 +18,13 @@ class Source
         return $this->uri;
     }
 
-    public function getLocalUri(): ?string
+    public function getMappedUri(): ?string
     {
-        return $this->localUri;
+        return $this->mappedUri;
     }
 
     public function isAvailable(): bool
     {
-        return !empty($this->localUri);
+        return !empty($this->mappedUri);
     }
 }

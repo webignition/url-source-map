@@ -23,10 +23,10 @@ class SourceMap implements \ArrayAccess, \Iterator, \Countable
         return $this->offsetGet($uri);
     }
 
-    public function getByLocalUri(string $localUri): ?Source
+    public function getByMappedUri(string $localUri): ?Source
     {
         foreach ($this as $source) {
-            if ($source->isAvailable() && $localUri === $source->getLocalUri()) {
+            if ($source->isAvailable() && $localUri === $source->getMappedUri()) {
                 return $source;
             }
         }
