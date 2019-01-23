@@ -6,11 +6,13 @@ class Source
 {
     private $uri;
     private $mappedUri;
+    private $type;
 
-    public function __construct(string $uri, ?string $mappedUri = null)
+    public function __construct(string $uri, ?string $mappedUri = null, ?string $type = null)
     {
         $this->uri = $uri;
         $this->mappedUri = $mappedUri;
+        $this->type = $type;
     }
 
     public function getUri(): string
@@ -21,6 +23,11 @@ class Source
     public function getMappedUri(): ?string
     {
         return $this->mappedUri;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
     }
 
     public function isAvailable(): bool
